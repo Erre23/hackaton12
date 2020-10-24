@@ -285,18 +285,18 @@
             const edad = Number.parseInt(modal.querySelector('[name=edad]').value.trim());
             const especialidad = modal.querySelector('[name=especialidad]').value.trim();
             const celular = modal.querySelector('[name=celular]').value.trim();
-            const email = modal.querySelector('[name=email]').value.trim();
+            const email = modal.querySelector('[name=email]').value.trim().toLowerCase();
 
             if (validarDatos(nombre, apellido, edad, especialidad, celular, email)) {
-                alert(`¡Bienvenido ${nombre} ${apellido} tu registro se realizó con éxito!
+                alert(`¡Bienvenido ${capitalizeText(nombre)} ${capitalizeText(apellido)} tu registro se realizó con éxito!
 
 Hemos enviado un correo de confirmación a la dirección de correo ${email}
 
 Datos de registro:
-- Nombre: ${nombre}
-- Apellido: ${apellido}
+- Nombre: ${capitalizeText(nombre)}
+- Apellido: ${capitalizeText(apellido)}
 - Edad: ${edad}
-- Especialidad: ${especialidad}
+- Especialidad: ${capitalizeText(especialidad)}
 - Celular: ${celular}
 - Email: ${email} `)
                 frmModal_close();
@@ -331,6 +331,10 @@ Datos de registro:
             }
 
             return true;
+        }
+        
+        function capitalizeText(cadena) {
+            return cadena.charAt(0).toUpperCase() + cadena.slice(1).toLowerCase();
         }
 
         //Este evento se usa para que cuando se dé click fuera del modal , el modal se cierre
