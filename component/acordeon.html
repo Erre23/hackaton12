@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <h1>Hackaton 12 - Por Eduardo Rodríguez</h1>
+        <nav>
+            <ul>
+                <li><a href="./dropdown.html">Dropdown</a></li>
+                <li><a href="./acordeon.html">Acordeon</a></li>
+                <li><a href="./modal.html">Modal</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="acordeon">
+            <div class="acordeon-section">
+                <div class="acordeon-button">Grupo 1
+                    <i class="fas fa-angle-down"></i>
+                </div>
+                <div class="acordeon-content">
+                    <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime architecto nobis commodi nihil quaerat possimus, pariatur quae. Similique, in! Nemo magni eos tempore deleniti laboriosam nam, atque tempora neque dolore! </p>
+                </div>
+            </div>
+            <div class="acordeon-section">
+                <div class="acordeon-button">Grupo 2
+                    <i class="fas fa-angle-down"></i>
+                </div>
+                <div class="acordeon-content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae odit labore nulla fuga nobis itaque, est, aliquam perferendis commodi harum, dicta laudantium magnam sequi sint quae laboriosam. Quam, harum necessitatibus.</p>
+                </div>
+            </div>
+            <div class="acordeon-section">
+                <div class="acordeon-button">Grupo 3
+                    <i class="fas fa-angle-down"></i>
+                </div>
+                <div class="acordeon-content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae odit labore nulla fuga nobis itaque, est, aliquam perferendis commodi harum, dicta laudantium magnam sequi sint quae laboriosam. Quam, harum necessitatibus.</p>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="acordeon">
+            <div class="acordeon-section">
+                <div class="acordeon-button">Grupo 1
+                    <i class="fas fa-angle-down"></i>
+                </div>
+                <div class="acordeon-content">
+                    <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime architecto nobis commodi nihil quaerat possimus, pariatur quae. Similique, in! Nemo magni eos tempore deleniti laboriosam nam, atque tempora neque dolore! </p>
+                </div>
+            </div>
+            <div class="acordeon-section">
+                <div class="acordeon-button">Grupo 2
+                    <i class="fas fa-angle-down"></i>
+                </div>
+                <div class="acordeon-content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae odit labore nulla fuga nobis itaque, est, aliquam perferendis commodi harum, dicta laudantium magnam sequi sint quae laboriosam. Quam, harum necessitatibus.</p>
+                </div>
+            </div>
+            <div class="acordeon-section">
+                <div class="acordeon-button">Grupo 3
+                    <i class="fas fa-angle-down"></i>
+                </div>
+                <div class="acordeon-content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae odit labore nulla fuga nobis itaque, est, aliquam perferendis commodi harum, dicta laudantium magnam sequi sint quae laboriosam. Quam, harum necessitatibus.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <style>
+        * ,* {
+            font-family: 'Tahoma';
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1c7ed6;
+            font-weight: bold;
+        }
+
+        nav > ul {
+            display: flex;
+            justify-content: center;
+        }
+        nav > ul > li {
+            list-style: none;
+        }
+        li > a {
+            text-decoration: none;
+            margin: 5px;
+            background: #1c7ed6;
+            border: 2px solid #1c7ed6;
+            color: white;
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 15px;
+            user-select: none;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        li > a:hover {
+            background-color: white;
+            color: #1c7ed6;
+            cursor: pointer;
+        }
+
+        .acordeon {
+            border: 1px solid silver;
+            border-radius: 4px;
+            display: block;
+            position: relative;
+        }
+        .acordeon-button {
+            background: rgb(245, 245, 245);
+            border-bottom: 1px solid silver;
+            color: #1c7ed6;
+            display: block;
+            padding: 20px 20px;
+            user-select: none;
+        }
+        .acordeon-button:hover {
+            cursor: pointer;
+            background-color: #1c7ed6;
+            color: white;
+        }
+        .acordeon-content {
+            background: white;
+            border-bottom: 1px solid silver;
+            position: relative;
+            display: none;
+            flex-direction: column;
+            padding: 30px 20px;
+            min-width: 150px;
+            z-index: 1;
+        }
+        .acordeon-content-block {
+            display: block;
+        }
+    </style>
+    <script>
+        
+        // Lo hacemos de esta manera por si hay mas de un elemento con la clase
+        const main = document.querySelector('main');
+        main.addEventListener('click', main_click); 
+        
+        function main_click(e) {
+            e.preventDefault();
+            if (e.target.classList.contains('acordeon-button')) {
+                acordeonContent_CloseAll(e.target.parentElement.parentElement);
+                acordeonContent_visible(e.target.parentElement);
+            } else if (e.target.classList.contains('fas')) {
+                acordeonContent_CloseAll(e.target.parentElement.parentElement.parentElement);
+                acordeonContent_visible(e.target.parentElement.parentElement);
+            }
+        }
+
+        function acordeonContent_visible(container) {
+            const content = container.querySelector(".acordeon-content");
+            content.classList.toggle('acordeon-content-block');
+            console.log(content.classList);
+
+            const icon = container.querySelector(".fas");            
+            icon.classList.toggle('fa-angle-down');
+            icon.classList.toggle('fa-angle-up');
+        }
+
+        function acordeonContent_CloseAll(container) {
+            Array.from(container.querySelectorAll(".acordeon-section .acordeon-content")).forEach(e => {
+                e.classList.remove('acordeon-content-block');
+            });
+
+            Array.from(container.querySelectorAll(".acordeon-section .acordeon-button .fas")).forEach(e => {
+                if (e.classList.contains('fa-angle-up')) {
+                    e.classList.remove('fa-angle-up');           
+                    e.classList.add('fa-angle-down');
+                }
+            }); 
+        }
+    </script>
+</body>
+</html>
