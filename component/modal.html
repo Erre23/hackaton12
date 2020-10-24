@@ -227,6 +227,7 @@
         .frm-control:focus {
             border-color: #1c7ed6;
             background: lightgoldenrodyellow;
+            outline: 2px solid #1c7ed6;
         }
 
     </style>
@@ -273,7 +274,7 @@
             const edad = Number.parseInt(modal.querySelector('[name=edad]').value);
             const especialidad = modal.querySelector('[name=especialidad]').value;
 
-            if (vaildarDatos(nombre, apellido, edad, especialidad)) {
+            if (validarDatos(nombre, apellido, edad, especialidad)) {
                 alert(`¡Bienvenido ${nombre} ${apellido} tu registro se realizó con éxito!
                     
 Datos de registro:
@@ -285,7 +286,7 @@ Datos de registro:
             }
         }
 
-        function vaildarDatos(nombre, apellido, edad, especialidad) {
+        function validarDatos(nombre, apellido, edad, especialidad) {
             let msgError = '';
             if (!nombre.trim()) {
                 msgError += '\n- Nombre'; 
