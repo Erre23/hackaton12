@@ -280,12 +280,12 @@
             });
         }
         function frmModal_read() {
-            const nombre = modal.querySelector('[name=nombre]').value;
-            const apellido = modal.querySelector('[name=apellido]').value;
-            const edad = Number.parseInt(modal.querySelector('[name=edad]').value);
-            const especialidad = modal.querySelector('[name=especialidad]').value;
-            const celular = modal.querySelector('[name=celular]').value;
-            const email = modal.querySelector('[name=email]').value;
+            const nombre = modal.querySelector('[name=nombre]').value.trim();
+            const apellido = modal.querySelector('[name=apellido]').value.trim();
+            const edad = Number.parseInt(modal.querySelector('[name=edad]').value.trim());
+            const especialidad = modal.querySelector('[name=especialidad]').value.trim();
+            const celular = modal.querySelector('[name=celular]').value.trim();
+            const email = modal.querySelector('[name=email]').value.trim();
 
             if (validarDatos(nombre, apellido, edad, especialidad, celular, email)) {
                 alert(`¡Bienvenido ${nombre} ${apellido} tu registro se realizó con éxito!
@@ -305,16 +305,16 @@ Datos de registro:
 
         function validarDatos(nombre, apellido, edad, especialidad, celular, email) {
             let msgError = '';
-            if (!nombre.trim()) {
+            if (!nombre) {
                 msgError += '\n- Olvidó ingresar el Nombre'; 
             }
-            if (!apellido.trim()) {
+            if (!apellido) {
                 msgError += '\n- Olvidó ingresar el Apellido'; 
             }
             if (!edad || edad < 1 || edad > 99) {
                 msgError += '\n- La Edad debe ser un número entre 1 y 99'; 
             }
-            if (!especialidad.trim()) {
+            if (!especialidad) {
                 msgError += '\n- Olvidó ingresar la Especialidad'; 
             }
 
