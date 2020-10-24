@@ -314,7 +314,7 @@ Datos de registro:
             if (!edad || edad < 1 || edad > 99) {
                 msgError += '\n- La Edad debe ser un número entre 1 y 99'; 
             }
-            if (!especialidad) {
+            if (!especialidad.trim()) {
                 msgError += '\n- Olvidó ingresar la Especialidad'; 
             }
 
