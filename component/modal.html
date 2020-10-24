@@ -25,22 +25,30 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="modal-close">&times;</span>
-                    <h2>Este es el título o header del modal</h2>
+                    <h2>Ingrese los siguientes datos</h2>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <label for="nombre">Nombre</label>
-                        <input name="nombre" type="text" placeholder="Ingrese su nombre" >
+                        <div class="frm-group">
+                            <label for="nombre">Nombre</label>
+                            <input name="nombre" class="frm-control" type="text" placeholder="Ingrese su nombre" >
+                        </div>
+                    
+                        <div class="frm-group">
+                            <label for="apellido">Apellido</label>
+                            <input name="apellido" class="frm-control" type="text" placeholder="Ingrese su apellido" >
+                        </div>
                     </div>
 
                     <div class="row">
-                        <label for="apellido">Apellido</label>
-                        <input name="apellido" type="text" placeholder="Ingrese su apellido" >
-                    </div>
-
-                    <div class="row">
-                        <label for="edad">Edad</label>
-                        <input name="edad" min=0 max=99 type="number"placeholder="Ingrese su edad" >
+                        <div class="frm-group">
+                            <label for="edad">Edad</label>
+                            <input name="edad" class="frm-control" min=0 max=99 type="number"placeholder="Ingrese su edad" >
+                        </div>
+                        <div class="frm-group">
+                            <label for="especialidad">Especialidad</label>
+                            <input name="especialidad" class="frm-control" type="text" placeholder="Ingrese su especialidad" >
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -93,7 +101,6 @@
         .btn {
             background: #1c7ed6;
             border: 2px solid #1c7ed6;
-            border-radius: 4px;
             color: white;
             display: inline-block;
             margin: 5px;
@@ -138,7 +145,7 @@
             padding: 0;
             border: 1px solid #888;
             width: 80%;
-            max-width: 800px;
+            max-width: 600px;
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
             -webkit-animation-name: animatetop;
             -webkit-animation-duration: 0.4s;
@@ -199,7 +206,27 @@
 
         .row {
             display: block;
-            margin: 5px;
+        }
+
+        .frm-group {
+            display: inline-block;
+            margin:5px;
+        }
+
+        .frm-group > label {
+            display: inline-block;
+            min-width: 90px;
+            text-align: right;
+        }
+
+        .frm-control {
+            font-size: 15px;
+            border: 2px solid gray;
+            padding: 5px;
+        }
+        .frm-control:focus {
+            border-color: #1c7ed6;
+            background: lightgoldenrodyellow;
         }
 
     </style>
@@ -244,27 +271,37 @@
             const nombre = modal.querySelector('[name=nombre]').value;
             const apellido = modal.querySelector('[name=apellido]').value;
             const edad = Number.parseInt(modal.querySelector('[name=edad]').value);
+            const especialidad = modal.querySelector('[name=especialidad]').value;
 
-            if (vaildarDatos(nombre, apellido, edad)) {
-                alert(`Bienvenido tu nombre es ${nombre}, tu apellido es ${apellido} y tu edad es ${edad} `)
+            if (vaildarDatos(nombre, apellido, edad, especialidad)) {
+                alert(`¡Bienvenido ${nombre} ${apellido} tu registro se realizó con éxito!
+                    
+Datos de registro:
+- Nombre: ${nombre}
+- Apellido: ${apellido}
+- Edad: ${edad}
+- Especialidad: ${especialidad} `)
                 frmModal_close();
             }
         }
 
-        function vaildarDatos(nombre, apellido, edad) {
+        function vaildarDatos(nombre, apellido, edad, especialidad) {
             let msgError = '';
-            if (!nombre) {
-                msgError += 'Nombre'; 
+            if (!nombre.trim()) {
+                msgError += '\n- Nombre'; 
             }
-            if (!apellido) {
-                msgError += (msgError !== '' ? ', ' : '') + 'Apellido'; 
+            if (!apellido.trim()) {
+                msgError += '\n- Apellido'; 
             }
             if (!edad) {
-                msgError += (msgError !== '' ? ', ' : '') + 'Edad'; 
+                msgError += '\n- Edad'; 
+            }
+            if (!especialidad) {
+                msgError += '\n- Especialidad'; 
             }
 
             if (msgError) {
-                alert(`Olvidó ingresar los siguientes datos: ${msgError}`);
+                alert(`Olvidó ingresar los siguientes datos:\n${msgError}`);
                 return false;
             }
 
