@@ -19,9 +19,9 @@
         </nav>
     </header>
     <main>
-        <div id="myBtn" class="btn">Open Modal</div>
+        <div id="btnModal" class="btn">REGISTRAR DATOS</div>
 
-        <div id="myModal" class="modal">
+        <div id="frmModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="modal-close">&times;</span>
@@ -30,12 +30,12 @@
                 <div class="modal-body">
                     <div class="row">
                         <label for="nombre">Nombre</label>
-                        <input name="nombre" type="text" placeholder="Ingrese su nombre">
+                        <input name="nombre" type="text" placeholder="Ingrese su nombre" >
                     </div>
 
                     <div class="row">
                         <label for="apellido">Apellido</label>
-                        <input name="apellido" type="text" placeholder="Ingrese su apellido">
+                        <input name="apellido" type="text" placeholder="Ingrese su apellido" >
                     </div>
 
                     <div class="row">
@@ -205,29 +205,77 @@
     </style>
     <script>
         
-        // Get the modal
-        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("btnModal");
+        var modal = document.getElementById("frmModal");
 
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
+        btn.addEventListener('click', btnModal_click);
+        modal.addEventListener('click', frmModal_click);
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("modal-close")[0];
         // When the user clicks on the button, open the modal
-        btn.onclick = function() {
-        modal.style.display = "block";
+        function btnModal_click() {
+            frmModal_clear();
+            modal.style.display = "block";
         }
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
+        function frmModal_click(e) {
+            if (e.target.classList.contains('modal-close')) {
+                frmModal_close();
+            }
+            else if (e.target.classList.contains('modal-cancel')) {
+                frmModal_close();
+                alert('Has cancelado los datos');
+            }
+            else if (e.target.classList.contains('modal-success')) {
+                frmModal_read()
+            }
+        }
+
+        function frmModal_close() {
             modal.style.display = "none";
+            frmModal_clear();
         }
 
-        // When the user clicks anywhere outside of the modal, close it
+        function frmModal_clear() {
+            Array.from(modal.querySelectorAll('input')).forEach(e => {
+                e.value = '';
+            });
+        }
+        function frmModal_read() {
+            const nombre = modal.querySelector('[name=nombre]').value;
+            const apellido = modal.querySelector('[name=apellido]').value;
+            const edad = Number.parseInt(modal.querySelector('[name=edad]').value);
+
+            if (vaildarDatos(nombre, apellido, edad)) {
+                alert(`Bienvenido tu nombre es ${nombre}, tu apellido es ${apellido} y tu edad es ${edad} `)
+                frmModal_close();
+            }
+        }
+
+        function vaildarDatos(nombre, apellido, edad) {
+            let msgError = '';
+            if (!nombre) {
+                msgError += 'Nombre'; 
+            }
+            if (!apellido) {
+                msgError += (msgError !== '' ? ', ' : '') + 'Apellido'; 
+            }
+            if (!edad) {
+                msgError += (msgError !== '' ? ', ' : '') + 'Edad'; 
+            }
+
+            if (msgError) {
+                alert(`Olvidó ingresar los siguientes datos: ${msgError}`);
+                return false;
+            }
+
+            return true;
+        }
+
+        //Este evento se usa para que cuando se dé click fuera del modal , el modal se cierre
         window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         } 
     </script>
 </body>
